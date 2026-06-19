@@ -1,16 +1,13 @@
 {
+  "default_firefox_profile_name": "Regular",
   "preferences": [
     {
       "firefox_profile_name": "Local",
-      "urls": [".*.vinkso\\.nl.*" ]
-    },
-    {
-      "firefox_profile_name": "Local",
-      "urls": [".*.localhost1\\.nl.*" ]
+      "urls": [".*.vinkso\\.nl.*", ".*.localhost1\\.nl.*"]
     },
     {
       "firefox_profile_name": "Personal",
-      "urls": [".*.google\\.com.*" ]
+      "urls": [".*.google\\.com.*",".*.gmail\\.com", ".*gmail\\.com" ]
     }
   ]
 }
