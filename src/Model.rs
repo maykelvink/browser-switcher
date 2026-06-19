@@ -7,6 +7,28 @@ use std::path::Path;
 pub type ModelResult<T> = Result<T, Box<dyn std::error::Error>>;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct BrowserIds {
+    #[serde(rename = "browserId")]
+    pub browser_id: u64,
+    pub firefox_profile_path: String,
+    pub firefox_profile_name: String,
+}
+
+pub fn save_browser_ids_to_file(
+    path: impl AsRef<Path>,
+    browser_ids: &[BrowserIds],
+) -> ModelResult<()> {
+    if let Some(parent) = path.as_ref().parent() {
+        fs::create_dir_all(parent)?;
+    }
+
+    let content = serde_json::to_string_pretty(browser_ids)?;
+    fs::write(path, content)?;
+
+    Ok(())
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct UrlSpecificPreferences {
     pub firefox_profile_name: String,
     #[serde(rename = "urls")]
@@ -15,6 +37,7 @@ pub struct UrlSpecificPreferences {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct FirefoxProfilePreferences {
+    pub default_firefox_profile_name: Option<String>,
     pub preferences: Vec<UrlSpecificPreferences>,
 }
 
@@ -71,6 +94,7 @@ mod tests {
     fn loads_preferences_from_json() {
         let path = temp_model_file();
         let expected = FirefoxProfilePreferences {
+            default_firefox_profile_name: Some("default".to_string()),
             preferences: vec![UrlSpecificPreferences {
                 firefox_profile_name: "work".to_string(),
                 url_regexes: vec![r"^https://forgejo\.org(/.*)?$".to_string()],
@@ -94,6 +118,7 @@ mod tests {
     #[test]
     fn reports_invalid_url_regexes() {
         let preferences = FirefoxProfilePreferences {
+            default_firefox_profile_name: None,
             preferences: vec![UrlSpecificPreferences {
                 firefox_profile_name: "broken".to_string(),
                 url_regexes: vec!["[".to_string()],
