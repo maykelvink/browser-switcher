@@ -46,6 +46,29 @@ The app also creates this file on first run if it is missing or empty:
 
 That file is generated from Firefox's profile-group SQLite database and contains all known Firefox profiles:
 
+~/snap/firefox/common/.mozilla/firefox/Profile Groups
+```
+maykel@kubuntu:~/snap/firefox/common/.mozilla/firefox/Profile Groups$ ls -tlra
+total 3180
+-rw-r--r--  1 maykel maykel 983040 Jun 19 15:23 8fef57bf.sqlite.bak
+-rw-r--r--  1 maykel maykel 983040 Jun 24 20:24 8fef57bf.sqlite
+-rw-r--r--  1 maykel maykel 557496 Jun 26 11:34 8fef57bf.sqlite-wal
+-rw-r--r--  1 maykel maykel  32768 Jun 26 11:34 8fef57bf.sqlite-shm
+drwxrwxr-x 12 maykel maykel   4096 Jun 26 11:34 ..
+
+```
+
+Inside the sqlite file you'll find the mapping as what is shown on screen inside firefox itself.
+```
+sqlite> select * from Profiles;
+1|bwpjwmfl.personal|Original profile|briefcase|default-theme@mozilla.org|rgb(255,255,255)|rgb(28,27,34)
+2|VAbR4QlH.Profile 1|Personal|shopping|{4223a94a-d3f9-40e9-95dd-99aca80ea04b}|rgb(171,223,255)|rgb(4,35,86)
+3|iHi3z6xQ.Profile 2|Regular|book|default-theme@mozilla.org|rgba(252, 252, 252, 1)|rgba(74, 77, 81, 1)
+4|J6aqUnqT.Profile 3|Local|flower|{cd6791f7-4b6d-47b4-8877-1d4c82c6699d}|rgb(255,230,153)|rgb(66,27,0)
+5|tArsRJOP.Profile 4|secure|heart|{7063abff-a690-4b87-a548-fc32d3ce5708}|rgb(181,240,181)|rgb(0,50,0)
+6|ckOFUWqH.Profile 5|Loxia|heart|{7063abff-a690-4b87-a548-fc32d3ce5708}|rgb(181,240,181)|rgb(0,50,0)
+```
+
 ```json
 [
   {
