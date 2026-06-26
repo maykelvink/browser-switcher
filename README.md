@@ -30,7 +30,7 @@ Example:
   "preferences": [
     {
       "firefox_profile_name": "Local",
-      "urls": [".*.vinkso\\.nl.*"]
+      "urls": [".*.example\\.nl.*"]
     }
   ]
 }
