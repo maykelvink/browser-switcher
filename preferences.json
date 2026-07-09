@@ -3,7 +3,7 @@
   "preferences": [
     {
       "firefox_profile_name": "Local",
-      "urls": [".*.vinkso\\.nl.*", ".*.localhost1\\.nl.*"]
+      "urls": [".*.example\\.nl.*", ".*.example2\\.nl.*"]
     },
     {
       "firefox_profile_name": "Personal",
